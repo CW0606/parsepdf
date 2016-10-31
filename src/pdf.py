@@ -25,8 +25,8 @@ class TextBOX(object):
         self.width = self.end_x - self.start_y
         self.height = self.end_y - self.start_y
 
-    def reset_text_box(self, start_x=None, start_y=None, end_x=None, end_y=None,
-                       content=None, font_dict=None):
+    def reset_text_box(self, start_x=None, start_y=None, end_x=None, 
+                       end_y=None, content=None, font_dict=None):
         """
         重置页面框的起始终止xy值,page_no
         :param start_x:
@@ -76,8 +76,8 @@ class PageBOX(object):
             return None
         self.text_box_list.append(text_box)
 
-    def reset_page_box(self, start_x=None, start_y=None, end_x=None, end_y=None,
-                       page_no=None):
+    def reset_page_box(self, start_x=None, start_y=None, end_x=None, 
+                       end_y=None, page_no=None):
         """
         重置页面框的起始终止xy值,page_no
         :param start_x:
@@ -195,11 +195,13 @@ class PDFTools(object):
             page_box = sorted_list[i]
             page_box.reset_page_box(end_x=PDFTools.PDF_CONTENT_END_X,
                                     end_y=PDFTools.PDF_CONTENT_END_Y)
-            page_box.reset_text_box_list(offset_x=-PDFTools.PDF_CONTENT_START_X,
-                                         offset_y=-PDFTools.PDF_CONTENT_START_Y)
+            page_box.reset_text_box_list(
+                offset_x=-PDFTools.PDF_CONTENT_START_X,
+                offset_y=-PDFTools.PDF_CONTENT_START_Y)
             page_box.reset_text_box_list(offset_y=merge_box.height)
-            merge_box.reset_page_box(end_y=merge_box.height+page_box.height,
-                                     end_x=PDFTools.PDF_CONTENT_END_X)
+            merge_box.reset_page_box(
+                end_y=merge_box.height+page_box.height,
+                end_x=PDFTools.PDF_CONTENT_END_X)
             merge_box.text_box_list += page_box.text_box_list
 
         return merge_box
