@@ -70,37 +70,64 @@ class PDFParser(object):
         org_list = PDFTools.get_same_name_text_box(data_list,
                                                         u'数据发生机构名称')
         sex = PDFTools.get_same_name_text_box(data_list, u'性别')[0]
-        birthday = PDFTools.get_same_name_text_box(data_list, u'出生日期')[0]
-        married = PDFTools.get_same_name_text_box(data_list, u'婚姻状况')[0]
-        phone = PDFTools.get_same_name_text_box(data_list, u'手机号码')[0]
-        work_phone = PDFTools.get_same_name_text_box(data_list, u'单位电话')[0]
-        home_phone = PDFTools.get_same_name_text_box(data_list, u'住宅电话')[0]
+        birthday = PDFTools.get_same_name_text_box(data_list, 
+                                                   u'出生日期')[0]
+        married = PDFTools.get_same_name_text_box(data_list, 
+                                                  u'婚姻状况')[0]
+        phone = PDFTools.get_same_name_text_box(data_list, 
+                                                u'手机号码')[0]
+        work_phone = PDFTools.get_same_name_text_box(data_list, 
+                                                     u'单位电话')[0]
+        home_phone = PDFTools.get_same_name_text_box(data_list, 
+                                                     u'住宅电话')[0]
         education = PDFTools.get_same_name_text_box(data_list, u'学历')[0]
         degree = PDFTools.get_same_name_text_box(data_list, u'学位')[0]
-        contact_addr = PDFTools.get_same_name_text_box(data_list, u'通讯地址')[0]
-        home_addr = PDFTools.get_same_name_text_box(data_list, u'户籍地址')[0]
+        contact_addr = PDFTools.get_same_name_text_box(data_list, 
+                                                       u'通讯地址')[0]
+        home_addr = PDFTools.get_same_name_text_box(data_list, 
+                                                    u'户籍地址')[0]
         merge_box = PDFTools.get_merge_text_box
         return {
-            u'性别': merge_box(data_list, sex, org_list[0], None, birthday).content,
-            u'出生日期': merge_box(data_list, birthday, org_list[1], sex, married).content,
-            u'婚姻状况': merge_box(data_list, married, org_list[2], birthday, phone).content,
-            u'手机号码': merge_box(data_list, phone, org_list[3], married, None).content,
-            u'性别数据发生机构': merge_box(data_list, org_list[0], work_phone, None, org_list[1]).content,
-            u'出生日期数据发生机构': merge_box(data_list, org_list[1], home_phone, org_list[0], org_list[2]).content,
-            u'婚姻状况数据发生机构': merge_box(data_list, org_list[2], education, org_list[1], org_list[3]).content,
-            u'手机号码数据发生机构': merge_box(data_list, org_list[3], degree, org_list[2], None).content,
-            u'单位电话': merge_box(data_list, work_phone, org_list[4], None, home_phone).content,
-            u'住宅电话': merge_box(data_list, home_phone, org_list[5], work_phone, education).content,
-            u'学历':  merge_box(data_list, education, org_list[6], home_phone, degree).content,
-            u'学位': merge_box(data_list, degree, org_list[7], education, None).content,
-            u'单位电话数据发生机构': merge_box(data_list, org_list[4], contact_addr, None, org_list[5]).content,
-            u'住宅电话数据发生机构': merge_box(data_list, org_list[5], contact_addr, org_list[4], org_list[6]).content,
-            u'学历数据发生机构': merge_box(data_list, org_list[6], home_addr, org_list[5], org_list[7]).content,
-            u'学位电话数据发生机构': merge_box(data_list, org_list[7], home_addr, org_list[6], None).content,
-            u'通讯地址': merge_box(data_list, contact_addr, org_list[8], None, home_addr).content,
-            u'户籍地址': merge_box(data_list, home_addr, org_list[9], contact_addr, None).content,
-            u'通讯地址数据发生机构': merge_box(data_list, org_list[8], None, None, org_list[9]).content,
-            u'户籍地址数据发生机构': merge_box(data_list, org_list[9], None, org_list[8], None).content,
+            u'性别': merge_box(data_list, sex, org_list[0], None, 
+                             birthday).content,
+            u'出生日期': merge_box(data_list, birthday, org_list[1], sex, 
+                               married).content,
+            u'婚姻状况': merge_box(data_list, married, org_list[2], 
+                               birthday, phone).content,
+            u'手机号码': merge_box(data_list, phone, org_list[3], married, 
+                               None).content,
+            u'性别数据发生机构': merge_box(data_list, org_list[0], 
+                                   work_phone, None, org_list[1]).content,
+            u'出生日期数据发生机构': merge_box(data_list, org_list[1], 
+                                     home_phone, org_list[0], org_list[2]).content,
+            u'婚姻状况数据发生机构': merge_box(data_list, org_list[2], 
+                                     education, org_list[1], org_list[3]).content,
+            u'手机号码数据发生机构': merge_box(data_list, org_list[3], 
+                                     degree, org_list[2], None).content,
+            u'单位电话': merge_box(data_list, work_phone, org_list[4], 
+                               None, home_phone).content,
+            u'住宅电话': merge_box(data_list, home_phone, org_list[5], 
+                               work_phone, education).content,
+            u'学历':  merge_box(data_list, education, org_list[6], 
+                              home_phone, degree).content,
+            u'学位': merge_box(data_list, degree, org_list[7], education, 
+                             None).content,
+            u'单位电话数据发生机构': merge_box(data_list, org_list[4], contact_addr,
+                                      None, org_list[5]).content,
+            u'住宅电话数据发生机构': merge_box(data_list, org_list[5], contact_addr,
+                                      org_list[4], org_list[6]).content,
+            u'学历数据发生机构': merge_box(data_list, org_list[6], 
+                                   home_addr, org_list[5], org_list[7]).content,
+            u'学位电话数据发生机构': merge_box(data_list, org_list[7], 
+                                     home_addr, org_list[6], None).content,
+            u'通讯地址': merge_box(data_list, contact_addr, org_list[8],
+                                None, home_addr).content,
+            u'户籍地址': merge_box(data_list, home_addr, org_list[9], 
+                               contact_addr, None).content,
+            u'通讯地址数据发生机构': merge_box(data_list, org_list[8], None, 
+                                     None, org_list[9]).content,
+            u'户籍地址数据发生机构': merge_box(data_list, org_list[9], None, 
+                                     org_list[8], None).content,
         }
 
     def get_couple(self):
@@ -133,10 +160,14 @@ class PDFParser(object):
         data_list = PDFTools.filter_text_box_by_height(
             text_box_list, max_height=PDFParser.CONTENT_HEIGHT + 1,
             mini_height=PDFParser.CONTENT_HEIGHT - 1)
-        number_list = PDFTools.get_same_name_text_box(text_box_list, u'编号')
-        address = PDFTools.get_same_name_text_box(text_box_list, u'居住地址')[0]
-        status = PDFTools.get_same_name_text_box(text_box_list, u'居住状况')[0]
-        org = PDFTools.get_same_name_text_box(text_box_list, u'数据发生机构名称')[0]
+        number_list = PDFTools.get_same_name_text_box(text_box_list, 
+                                                      u'编号')
+        address = PDFTools.get_same_name_text_box(text_box_list, 
+                                                  u'居住地址')[0]
+        status = PDFTools.get_same_name_text_box(text_box_list, 
+                                                 u'居住状况')[0]
+        org = PDFTools.get_same_name_text_box(text_box_list, 
+                                              u'数据发生机构名称')[0]
         update_date = PDFTools.get_same_name_text_box(text_box_list,
                                                       u'信息更新')[0]
 
@@ -161,8 +192,8 @@ class PDFParser(object):
                 bottom2 = second_numbers[i+1]
             living = {
                 u'编号': firsts_numbers[i].content,
-                u'居住地址': merge_box(data_list, up, bottom, firsts_numbers[i],
-                                   status).content,
+                u'居住地址': merge_box(data_list, up, bottom, 
+                                   firsts_numbers[i], status).content,
                 u'居住状况': merge_box(data_list, up, bottom, address,
                                    update_date).content,
                 u'信息更新日期': merge_box(data_list, up, bottom, status,
@@ -182,17 +213,25 @@ class PDFParser(object):
         if end_index == PDFParser.NO_INDEX:
             return None
         text_box_list = self.text_box_list[start_index+1:end_index]
-        data_list = PDFTools.filter_by_font(text_box_list, PDFParser.CONTENT_FONT)
-        number_list = PDFTools.get_same_name_text_box(text_box_list, u'编号')
-        company = PDFTools.get_same_name_text_box(text_box_list, u'工作单位')[0]
-        address = PDFTools.get_same_name_text_box(text_box_list, u'单位地址')[0]
-        job = PDFTools.get_same_name_text_box(text_box_list, u'职业')[0]
-        job_work = PDFTools.get_same_name_text_box(text_box_list, u'职务')[0]
-        industry = PDFTools.get_same_name_text_box(text_box_list, u'行业')[0]
+        data_list = PDFTools.filter_by_font(text_box_list, 
+                                            PDFParser.CONTENT_FONT)
+        number_list = PDFTools.get_same_name_text_box(text_box_list, 
+                                                      u'编号')
+        company = PDFTools.get_same_name_text_box(text_box_list, 
+                                                  u'工作单位')[0]
+        address = PDFTools.get_same_name_text_box(text_box_list, 
+                                                  u'单位地址')[0]
+        job = PDFTools.get_same_name_text_box(text_box_list, 
+                                              u'职业')[0]
+        job_work = PDFTools.get_same_name_text_box(text_box_list, 
+                                                   u'职务')[0]
+        industry = PDFTools.get_same_name_text_box(text_box_list, 
+                                                   u'行业')[0]
         title = PDFTools.get_same_name_text_box(text_box_list, u'职称')[0]
         import_year = PDFTools.get_same_name_text_box(text_box_list,
                                                       u'进入本单位')[0]
-        org = PDFTools.get_same_name_text_box(text_box_list, u'数据发生机构名称')[0]
+        org = PDFTools.get_same_name_text_box(text_box_list, 
+                                              u'数据发生机构名称')[0]
         update_date = PDFTools.get_same_name_text_box(text_box_list,
                                                       u'信息更新')[0]
         firsts_numbers = PDFTools.filter_text_box_by_other_text_box(
@@ -222,12 +261,13 @@ class PDFParser(object):
                 bottom3 = third_numbers[i+1]
             work = {
                 u'编号': firsts_numbers[i].content,
-                u'工作单位': merge_box(data_list, up, bottom, firsts_numbers[i],
+                u'工作单位': merge_box(data_list, up, bottom, 
+                                   firsts_numbers[i],
                                    address).content,
                 u'单位地址': merge_box(data_list, up, bottom, company,
                                    None).content,
-                u'职业': merge_box(data_list, up2, bottom2, second_numbers[i],
-                                     industry).content,
+                u'职业': merge_box(data_list, up2, bottom2, 
+                                 second_numbers[i], industry).content,
                 u'行业': merge_box(data_list, up2, bottom2,
                                        job, job_work ).content,
                 u'职务': merge_box(data_list, up2, bottom2, industry,
@@ -266,7 +306,6 @@ class PDFParser(object):
             u'异议标注数目': data_list[9].content
         }
 
-
     def get_alive_debit_card_infor(self):
         """未销户贷记卡信息汇总"""
         start_index = self.get_index(u'未销户贷记卡信息汇总')
@@ -286,6 +325,7 @@ class PDFParser(object):
             u'已用额度': data_list[6].content,
             u'最近6个月平均使用额度': data_list[7].content
         }
+    
     def get_alive_loan_infor(self):
         """未结清贷款信息汇总"""
         start_index = self.get_index(u'未结清贷款信息汇总')
@@ -369,17 +409,122 @@ class PDFParser(object):
             u'担保资格审查查询数': data_list[6].content,
             u'特约商户实名审查查询数': data_list[7].content
         }
+        
     def get_loan(self):
         """获得贷款信息"""
-        pass
+        loans = list()
+        loan = {
+            u'详情':'',
+            u'账户状态':'',
+            u'五级分类':'',
+            u'本金余额':'',
+            u'剩余还款期数':'',
+            u'本月应还款':'',
+            u'应还款日':'',
+            u'本月实还款':'',
+            u'最近一次还款日期':'',
+            u'当前逾期期数':'',
+            u'当前逾期金额':'',
+            u'逾期31天未还本金':'',
+            u'逾期61天未还本金':'',
+            u'逾期91天未还本金':'',
+            u'逾期180天以上未还本金':'',
+            u'24月还款记录':'',
+            }
 
     def get_debit_card(self):
         """获得贷记卡信息"""
-        pass
+        sep_name = u'发放的贷记卡' # 使用这个关键词将每条信息区分出来
+        offset = self.get_index(u'三 信贷交易信息明细')
+        start_index = self.get_index(u'贷记卡', offset)
+        if start_index == PDFParser.NO_INDEX:
+            return None
+        semicard_index = self.get_index(u'准贷记卡', offset)
+        query_index = self.get_index(u'四 查询记录', offset)
+        if semicard_index == PDFParser.NO_INDEX or semicard_index > query_index:
+            end_index = query_index
+        text_box_list = self.text_box_list[start_index:end_index]
+        sep_text_boxes = PDFTools.get_same_name_text_box(text_box_list, 
+                                                         sep_name)
+        sep_blocks = PDFTools.get_blocks_by_sep_box(
+            text_box_list, sep_text_boxes, text_box_list[0], text_box_list[-1])
+        debit_cards = list()
+        merge_box = PDFTools.get_merge_text_box
+        for block in sep_blocks:            
+            
+            data_list = PDFTools.filter_by_font(block,PDFParser.CONTENT_FONT)
+            count_status = PDFTools.get_same_name_text_box(block, u'账户状态')
+            if count_status is None or len(count_status) == 0:
+                debit_card = {
+                u'详情':merge_box(data_list, None, None, None, None).content
+                }
+            else:
+                count_status = PDFTools.get_same_name_text_box(block, u'账户状态')[0]
+                used_balance = PDFTools.get_same_name_text_box(block, u'已用额度')[0]
+                six_month = PDFTools.get_same_name_text_box(
+                    block, u'最近6个月平均使用额度')[0]
+                max_limit = PDFTools.get_same_name_text_box(
+                    block, u'最大使用额度')[0]
+                pay_limit = PDFTools.get_same_name_text_box(
+                    block, u'本月应还款')[0]
+                check_date = PDFTools.get_same_name_text_box(
+                    block, u'账单日')[0]
+                acture_pay = PDFTools.get_same_name_text_box(
+                    block, u'本月实还款')[0]
+                recent_pay_day = PDFTools.get_same_name_text_box(
+                    block, u'最近一次还款日期')[0]
+                current_ovedue_num = PDFTools.get_same_name_text_box(
+                    block, u'当前逾期期数')[0]
+                current_ovedue_money = PDFTools.get_same_name_text_box(
+                    block, u'当前逾期金额')[0]
+                pay24 = PDFTools.get_same_name_text_box(block, u'还款记录')[0]
+                debit_card = {
+                    u'详情':merge_box(data_list, None, count_status, None, 
+                                    None).content,
+                    u'账户状态':merge_box(data_list, count_status, check_date , 
+                                      None, used_balance).content,
+                    u'已用额度':merge_box(data_list, used_balance, acture_pay , 
+                                      count_status, six_month).content,
+                    u'最近6个月平均使用额度':merge_box(data_list, six_month, 
+                                             recent_pay_day , used_balance, 
+                                             max_limit).content,
+                    u'最大使用额度':merge_box(data_list, max_limit, 
+                                        current_ovedue_num, six_month, 
+                                        pay_limit).content,
+                    u'本月应还款':merge_box(data_list, pay_limit, 
+                                       current_ovedue_money, max_limit, 
+                                       None).content,
+                    u'账单日':merge_box(data_list, check_date, pay24 , 
+                                     None, acture_pay).content,
+                    u'本月实还款':merge_box(data_list, acture_pay, pay24 , 
+                                       check_date, recent_pay_day).content,
+                    u'最近一次还款日期':merge_box(data_list, recent_pay_day, pay24 , 
+                                          acture_pay, current_ovedue_num).content,
+                    u'当前逾期期数':merge_box(data_list, current_ovedue_num, pay24 , 
+                                       recent_pay_day, current_ovedue_money).content,
+                    u'当前逾期金额':merge_box(data_list, current_ovedue_money, pay24 , 
+                                        current_ovedue_num, None).content,
+                    u'24月还款记录':merge_box(data_list, pay24, None , None, 
+                                         None).content,
+                    }
+            debit_cards.append(debit_card)
+        return debit_cards
 
     def get_semicard(self):
         """获得准贷记卡信息"""
-        pass
+        semicards = list()
+        semicard = {
+            u'详情':'',
+            u'账户状态':'',
+            u'透支状态':'',
+            u'最近6个月平均透支额度':'',
+            u'最大投资余额':'',
+            u'账单日':'',
+            u'本月实还款':'',
+            u'最近一次还款日期':'',
+            u'透支180天以上未付余额':'',
+            u'24月还款记录':'',
+            }
 
     def get_personal_query(self):
         """获得个人查询信息"""
@@ -416,8 +561,8 @@ class PDFParser(object):
                 bottom = firsts_numbers [i + 1]
             query = {
                 u'编号': firsts_numbers [i].content,
-                u'查询日期': merge_box(data_list, up, bottom, firsts_numbers [i],
-                                   query_oper).content,
+                u'查询日期': merge_box(data_list, up, bottom, 
+                                   firsts_numbers[i], query_oper).content,
                 u'查询操作员': merge_box(data_list, up, bottom, query_date,
                                     query_reason).content,
                 u'查询原因': merge_box(data_list, up, bottom, query_oper,
@@ -425,7 +570,6 @@ class PDFParser(object):
             }
             querys.append(query)
         return querys
-
 
     def get_orgpro_query(self):
         """获得机构查询信息"""
@@ -471,23 +615,41 @@ class PDFParser(object):
             }
             querys.append(query)
         return querys
+    def to_string(self):
+        print parser.get_works()
+        print parser.get_living()
+        print parser.get_report_infor()
+        print parser.get_query_infor()
+        print parser.get_debit_card()
+        print parser.get_person()
+        print parser.get_credit_tips()
+        print parser.get_couple()
+        print parser.get_query_summary_infor()
+        print parser.get_personal_query()
+        print parser.get_orgpro_query()
+        print parser.get_alive_debit_card_infor()
+        print parser.get_alive_semi_card_infor()
+        print parser.get_alive_loan_infor()
 
 
 if __name__ == '__main__':
     parser = PDFParser('zqx.pdf')
-    works = parser.get_works()
-    livings = parser.get_living()
-    report_infor = parser.get_report_infor()
-    query_infor = parser.get_query_infor()
-    person = parser.get_person()
-    credit_tips = parser.get_credit_tips()
-    couple = parser.get_couple()
-    query_summary_infor = parser.get_query_summary_infor()
-    personal_query = parser.get_personal_query()
-    org_query = parser.get_orgpro_query()
-    alive_debit_card_infor = parser.get_alive_debit_card_infor()
-    alive_semi_infor = parser.get_alive_semi_card_infor()
-    alice_loan_infor = parser.get_alive_loan_infor()
+    parser.to_string()
+#     works = parser.get_works()
+#     livings = parser.get_living()
+#     report_infor = parser.get_report_infor()
+#     query_infor = parser.get_query_infor()
+#     debit_cards = parser.get_debit_card()
+#     person = parser.get_person()
+#     credit_tips = parser.get_credit_tips()
+#     couple = parser.get_couple()
+#     query_summary_infor = parser.get_query_summary_infor()
+#     personal_query = parser.get_personal_query()
+#     org_query = parser.get_orgpro_query()
+#     alive_debit_card_infor = parser.get_alive_debit_card_infor()
+#     alive_semi_infor = parser.get_alive_semi_card_infor()
+#     alice_loan_infor = parser.get_alive_loan_infor()
+    
     pass
 
 

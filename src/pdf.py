@@ -1,21 +1,22 @@
 # coding:utf-8
-from pdfminer.pdfparser import PDFParser
-from pdfminer.pdfdocument import PDFDocument
-from pdfminer.pdfpage import PDFPage
-from pdfminer.pdfpage import PDFTextExtractionNotAllowed
-from pdfminer.pdfinterp import PDFResourceManager
-from pdfminer.pdfinterp import PDFPageInterpreter
-from pdfminer.layout import *
-from pdfminer.converter import PDFPageAggregator
+""" PDF对象内容"""
+
 import random
 
-""" PDF对象内容"""
+from pdfminer.layout import LAParams, LTChar, LTTextBoxHorizontal
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfpage import PDFTextExtractionNotAllowed
+from pdfminer.pdfparser import PDFParser
+from pdfminer.converter import PDFPageAggregator
 
 
 class TextBOX(object):
     """ 文本框"""
     def __init__(self, content, start_x, start_y, end_x, end_y, font_dict):
-        """文本框中包含文本[内容,宽度,高度,start_x,start_y,end_x,end_y,page_no]"""
+        """文本框中包含文本[内容,宽度,高度,start_x,start_y,end_x,end_y,font_dict]"""
         self.content = content
         self.start_x = start_x
         self.start_y = start_y
@@ -28,7 +29,7 @@ class TextBOX(object):
     def reset_text_box(self, start_x=None, start_y=None, end_x=None, 
                        end_y=None, content=None, font_dict=None):
         """
-        重置页面框的起始终止xy值,page_no
+        重置页面框的起始终止xy值,font_dict
         :param start_x:
         :param start_y:
         :param end_x:
@@ -497,6 +498,7 @@ class PDFTools(object):
 
     @staticmethod
     def filter_by_font(text_box_list, font):
+        """使用字体区分选块"""
         if text_box_list is None:
             return  text_box_list
         if font is None:
@@ -506,6 +508,36 @@ class PDFTools(object):
             if font in text_box.font_dict.keys():
                 filter_list.append(text_box)
         return filter_list
+    
+    @staticmethod
+    def get_blocks_by_sep_box(text_box_list,sep_boxes,start_box,end_box):
+        """在一个text_box_list根据指定的,根据区分关键字段区分出每个同类型的区块
+        :param text_box_list: 目标text_box_list
+        :param sep_boxes: 区分块
+        :param start_box: 开始块
+        :param end_box: 结束块
+        """
+        if text_box_list is None:
+            return None
+        if sep_boxes is None or len(sep_boxes) == 0:
+            return None
+        sep_blocks = list()
+        for i in range(len(sep_boxes)):
+            if i == 0:
+                up = start_box
+            else:
+                up = sep_boxes[i]
+            if i == len(sep_boxes) - 1:
+                bottom = end_box
+            else:
+                bottom = sep_boxes[i+1]
+            sep_block = PDFTools.filter_text_box_by_other_text_box(
+                text_box_list,up , bottom, None, None)
+            if sep_boxes[i] not in sep_block:
+                sep_block.insert(0, sep_boxes[i])
+            sep_blocks.append(sep_block)
+        return sep_blocks
+        
 
 if __name__ == '__main__':
     page_box_list = PDFTools.parse_page_box('zqx.pdf')
